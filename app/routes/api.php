@@ -3,6 +3,8 @@
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
+require_once __DIR__ . '/../middlewares/jsonBodyParser.php';
+
 # All the api routes
 
 // Home
@@ -55,3 +57,27 @@ $app->get('/player/{id}', function (Request $request, Response $response, array 
     return $response->withHeader('Content-Type', 'application/json');
 });
 
+// Add a new player
+
+$app->post('/player/add', function (Request $request, Response $response) {
+    $parsedBody = $request->getParsedBody();
+
+    $queryBuilder = $this->get('DB')->getQueryBuilder();
+
+    $queryBuilder
+        ->insert('Players')
+        ->setValue('Name', '?')
+        ->setValue('Team', '?')
+        ->setValue('Category', '?')
+        ->setParameter(1, $parsedBody['Name'])
+        ->setParameter(2, $parsedBody['Team'])
+        ->setParameter(3, $parsedBody['Category'])
+    ;
+
+    $result = $queryBuilder->executeStatement();
+
+    $response->getBody()->write(json_encode($result));
+
+    return $response->withHeader('Content-Type', 'application/json');
+
+})->add($jsonBodyParser);
