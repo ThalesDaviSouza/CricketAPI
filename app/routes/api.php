@@ -36,4 +36,22 @@ $app->get('/players/', function(Request $request, Response $response){
     return $response->withHeader('Content-Type', 'application/json');
 });
 
+// Get a single Player
+
+$app->get('/player/{id}', function (Request $request, Response $response, array $args) {
+    $queryBuilder = $this->get('DB')->getQueryBuilder();
+
+    $queryBuilder
+        ->select('id', 'Name', 'Team', 'Category')
+        ->from('Players')
+        ->where('id = ?')
+        ->setParameter(1, $args['id'])
+    ;
+
+    $result = $queryBuilder->executeQuery()->fetchAssociative();
+
+    $response->getBody()->write(json_encode($result));
+
+    return $response->withHeader('Content-Type', 'application/json');
+});
 
