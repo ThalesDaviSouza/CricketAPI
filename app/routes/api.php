@@ -81,3 +81,30 @@ $app->post('/player/add', function (Request $request, Response $response) {
     return $response->withHeader('Content-Type', 'application/json');
 
 })->add($jsonBodyParser);
+
+
+// Update a Player
+
+$app->put('/player/{id}', function (Request $request, Response $response, array $args) {
+    $parsedBody = $request->getParsedBody();
+
+    $queryBuilder = $this->get('DB')->getQueryBuilder();
+
+    $queryBuilder
+        ->update('Players')
+        ->set('Name', '?')
+        ->set('Team', '?')
+        ->set('Category', '?')
+        ->where('id = ?')
+        ->setParameter(1, $parsedBody['Name'])
+        ->setParameter(2, $parsedBody['Team'])
+        ->setParameter(3, $parsedBody['Category'])
+        ->setParameter(4, $args['id'])
+    ;
+
+    $result = $queryBuilder->executeStatement();
+
+    $response->getBody()->write(json_encode($result));
+
+    return $response->withHeader('Content-Type', 'application/json');
+})->add($jsonBodyParser);
