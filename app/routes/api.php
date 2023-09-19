@@ -108,3 +108,22 @@ $app->put('/player/{id}', function (Request $request, Response $response, array 
 
     return $response->withHeader('Content-Type', 'application/json');
 })->add($jsonBodyParser);
+
+// Delete a Player
+
+$app->delete('/player/{id}', function(Request $request, Response $response, array $args) {
+
+    $queryBuilder = $this->get('DB')->getQueryBuilder();
+
+    $queryBuilder
+        ->delete('Players')
+        ->where('id = ?')
+        ->setParameter(1, $args['id'])
+    ;
+
+    $result = $queryBuilder->executeStatement();
+
+    $response->getBody()->write(json_encode($result));
+
+    return $response->withHeader('content-type', 'application/json');
+})->add($jsonBodyParser);
