@@ -3,7 +3,6 @@
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-require_once __DIR__ . '/../middlewares/jsonBodyParser.php';
 require_once __DIR__ . '/../middlewares/authentication.php';
 require_once __DIR__ . '/../middlewares/dataValidation.php';
 
@@ -83,7 +82,6 @@ $app->post('/player/add', function (Request $request, Response $response) {
     return $response->withHeader('Content-Type', 'application/json');
 
 })
-->add($jsonBodyParser)
 ->add($dataValidation)
 ->add($authentication);
 
@@ -113,7 +111,6 @@ $app->put('/player/{id}', function (Request $request, Response $response, array 
 
     return $response->withHeader('Content-Type', 'application/json');
 })
-->add($jsonBodyParser)
 ->add($dataValidation)
 ->add($authentication);
 
@@ -135,5 +132,4 @@ $app->delete('/player/{id}', function(Request $request, Response $response, arra
 
     return $response->withHeader('content-type', 'application/json');
 })
-->add($jsonBodyParser)
 ->add($authentication);

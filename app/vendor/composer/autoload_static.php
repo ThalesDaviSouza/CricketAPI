@@ -17,6 +17,7 @@ class ComposerStaticInit974e0799f8fea74f261914470a87cc1a
         'S' => 
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
+            'Symfony\\Component\\Dotenv\\' => 25,
             'Slim\\Psr7\\' => 10,
             'Slim\\' => 5,
         ),
@@ -59,6 +60,10 @@ class ComposerStaticInit974e0799f8fea74f261914470a87cc1a
         'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
+        ),
+        'Symfony\\Component\\Dotenv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/dotenv',
         ),
         'Slim\\Psr7\\' => 
         array (

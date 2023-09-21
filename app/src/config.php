@@ -5,22 +5,18 @@ class Config {
     private $errorSettings;
 
     public function __construct(){
-        # TODO: Change database info por env variables
-        # Actually it is only a study about slim
-        # But in a near future I'll make some changes like this
-
         $this->dbSettings = [
-            'dbname' => 'slimphp',
-            'user' => 'thale',
-            'password' => 'password',
-            'host' => 'mysql',
-            'driver' => 'pdo_mysql'
+            'dbname' => $_ENV['DB_NAME'],
+            'user' => $_ENV['DB_USER'],
+            'password' => $_ENV['DB_PASSWORD'],
+            'host' => $_ENV['DB_HOST'],
+            'driver' => $_ENV['DB_DRIVER']
         ];
 
         $this->errorSettings = [
-            'displayErrorDetails' => true,
-            'logErrors' => true,
-            'logErrorDetails' => true
+            'displayErrorDetails' => $_ENV['DISPLAY_ERROR_DETAILS'] === 'true',
+            'logErrors' => $_ENV['LOG_ERRORS'] === 'true',
+            'logErrorDetails' => $_ENV['LOG_ERROR_DETAILS'] === 'true'
         ];
     }
 
