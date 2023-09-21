@@ -1,6 +1,5 @@
 <?php
 
-use DI\Container;
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
 
@@ -13,9 +12,17 @@ $container = $containerBuilder->build();
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
-$app->addErrorMiddleware(true, true, true);
-
 require_once __DIR__ . '/../routes/api.php';
 require_once __DIR__ . '/../routes/web.php';
+
+$app->addRoutingMiddleware();
+
+$errorSettings = $container->get('Config')->getErrorSettings();
+
+$errorMiddleware = $app->addErrorMiddleware(
+    $errorSettings['displayErrorDetails'],
+    $errorSettings['logErrors'],
+    $errorSettings['logErrorDetails']
+);
 
 $app->run();

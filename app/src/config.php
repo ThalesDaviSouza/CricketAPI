@@ -16,11 +16,20 @@ class Config {
             'host' => 'mysql',
             'driver' => 'pdo_mysql'
         ];
+
+        $this->errorSettings = [
+            'displayErrorDetails' => true,
+            'logErrors' => true,
+            'logErrorDetails' => true
+        ];
     }
 
     public function getDbConfig(){
         return $this->dbSettings;
     }
 
+    public function getErrorSettings(){
+        return $this->errorSettings;
+    }
 }
 
