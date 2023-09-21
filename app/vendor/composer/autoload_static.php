@@ -32,6 +32,10 @@ class ComposerStaticInit974e0799f8fea74f261914470a87cc1a
         array (
             'Laravel\\SerializableClosure\\' => 28,
         ),
+        'J' => 
+        array (
+            'JsonSchema\\' => 11,
+        ),
         'I' => 
         array (
             'Invoker\\' => 8,
@@ -89,6 +93,10 @@ class ComposerStaticInit974e0799f8fea74f261914470a87cc1a
         'Laravel\\SerializableClosure\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/serializable-closure/src',
+        ),
+        'JsonSchema\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema',
         ),
         'Invoker\\' => 
         array (

@@ -5,6 +5,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 require_once __DIR__ . '/../middlewares/jsonBodyParser.php';
 require_once __DIR__ . '/../middlewares/authentication.php';
+require_once __DIR__ . '/../middlewares/dataValidation.php';
 
 # All the api routes
 
@@ -83,6 +84,7 @@ $app->post('/player/add', function (Request $request, Response $response) {
 
 })
 ->add($jsonBodyParser)
+->add($dataValidation)
 ->add($authentication);
 
 
@@ -112,6 +114,7 @@ $app->put('/player/{id}', function (Request $request, Response $response, array 
     return $response->withHeader('Content-Type', 'application/json');
 })
 ->add($jsonBodyParser)
+->add($dataValidation)
 ->add($authentication);
 
 // Delete a Player
